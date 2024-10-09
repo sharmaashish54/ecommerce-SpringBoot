@@ -14,7 +14,7 @@ import java.util.Optional;
 public class CategoryServiceImpl implements CategoryService{
 
     //private List<Category> categories = new ArrayList<>();
-    private Long nextId= 1L;// to not have null Id's and have incremented Id's
+
 
     @Autowired
     private CategoryRepository categoryRepository;
@@ -34,8 +34,6 @@ public class CategoryServiceImpl implements CategoryService{
         if(savedCategory != null){
             throw new APIException("Category with the name "+category.getCategoryName()+" already Exists!!");
         }
-        category.setCategoryId(nextId++);
-
         categoryRepository.save(category);
         //categories.add(category);
     }
