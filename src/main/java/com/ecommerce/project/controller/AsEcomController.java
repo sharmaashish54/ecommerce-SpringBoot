@@ -31,21 +31,13 @@ public class AsEcomController {
 
     @DeleteMapping("/admin/categories/{categoryId}")
     public ResponseEntity<String> deleteCategory(@PathVariable Long categoryId){
-        try {
             return ResponseEntity.ok(categoryService.deleteCategory(categoryId));
-        }catch (ResponseStatusException ex){
-            return new ResponseEntity<>(ex.getReason(), ex.getStatusCode());
-        }
     }
 
     //@PutMapping("/public/categories/{categoryId}")
     @RequestMapping(value = "/public/categories/{categoryId}", method = RequestMethod.PUT)
-    public ResponseEntity<String> updateCategory(@RequestBody Category category, @PathVariable Long categoryId){
-        try{
+    public ResponseEntity<String> updateCategory(@Valid @RequestBody Category category, @PathVariable Long categoryId){
             Category savedCategory = categoryService.updateCategory(category,categoryId);
             return ResponseEntity.ok("Requested Category with category ID :"+savedCategory.getCategoryId()+" is updated!!");
-        }catch (ResponseStatusException e){
-            return new ResponseEntity<>(e.getReason(),e.getStatusCode());
-        }
     }
 }
